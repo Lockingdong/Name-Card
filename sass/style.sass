@@ -1,0 +1,353 @@
+@import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css)
+
+@import url('https://fonts.googleapis.com/css?family=Roboto')
+@import url('https://fonts.googleapis.com/css?family=Oswald:300,400')
+
+@mixin duration($sec)
+   -webkit-transition-duration: $sec /* Safari */
+   transition-duration: $sec
+@mixin blur($x)
+   -webkit-filter: blur($x) /* Safari */
+   filter: blur($x)  
+   
+@mixin center
+   position: absolute
+   top: 50%
+   left: 50%
+   transform: translate(-50%, -50%)
+
+   
+@mixin transformSkew($deg)
+   -ms-transform: skew($deg) /* IE 9 */
+   -webkit-transform: skew($deg) /* Safari */
+   transform: skew($deg) /* Standard syntax */
+   
+@mixin transformScale($sca)
+   transform: translate(-10%, -50%)
+   -ms-transform: scale($sca)/* IE 9 */
+   -webkit-transform: scale($sca)/* Safari */
+   transform: scale($sca)
+
+@mixin greyScaleBlur($x)
+   -webkit-filter: grayscale(100%) blur($x)
+   -moz-filter: grayscale(100%) blur($x)
+   -ms-filter: grayscale(100%) blur($x)
+   -o-filter: grayscale(100%) blur($x)
+   filter: grayscale(100%) blur($x)
+
+   
+//----------------------
+$myWhite: #ECF0F1
+$myOran: #e74c3c
+$myBlack: #19242E
+$myBrown: #E9E4D7
+$cardHeight: 250px
+$cardWidth: 400px
+//----------------------
+*
+   margin: 0
+   padding: 0
+   //border: 1px solid
+body
+   height: 100%
+   width: 100%
+   background: -webkit-linear-gradient(to left, #497293 , #131e27) 
+   background: linear-gradient(to left, #497293 , #131e27)
+   background-attachment: fixed
+   overflow: hidden
+   display: flex
+   justify-content: center
+   align-items: center
+
+#background img  
+   position: absolute
+   z-index: -1
+   top: 50%
+   left: 50%
+   transform: translate(-50%,-50%)
+   //max-width: 100%
+   min-height: 100%
+   //width: 100%
+   min-width: 100%
+   //height: auto
+   opacity: 0.2
+   +greyScaleBlur(5px)
+   
+   
+#underCard
+   +center
+   //position: absolute
+   margin: auto
+   z-index: 1
+   height: $cardHeight
+   width: $cardWidth
+   background: transparent
+   border-radius: 8px !important
+   box-shadow: -5px 10px 15px rgba(black, 0.6)
+
+   
+.mainCard
+   font-family: 'Oswald', sans-serif
+   border-radius: 8px !important
+   font-family: 微軟正黑體
+   position: relative
+   overflow: hidden
+   height: $cardHeight
+   width: $cardWidth
+   -webkit-mask-image: radial-gradient(circle, white 100%, black 100%) //fix chrome border-radius bug with overflow-hidden
+   &:hover  
+      & .rightBack  
+         left: -9%
+      & .leftS ul
+         opacity: 1
+      & #photo
+         +blur(2px)
+         +transformScale(1.3)
+         top: -5%
+         left: -18%
+      & .rightS
+         left: 50%
+         & .rightCon
+            left: -3%
+            text-shadow: 1px 1px 6px $myBlack   
+         & #wrap .cube
+            //animation: spinOut 3s
+            transform: rotateX(30deg) rotateY(-320deg) rotateZ(10deg) 
+            +duration(2s)
+                    
+   .leftS
+      position: absolute
+      left: 8%
+      height: $cardHeight
+      width: 100px
+      ul
+         +duration(0.4s)
+         opacity: 0
+         color: $myBlack
+         font-size: 40px
+         line-Height: 70px
+         list-style: none
+         position: absolute
+         left: 50%
+         top: 50%
+         transform: translate(-50%, -50%)
+         li
+            +duration(0.3s)
+            &:hover
+               color: $myOran
+               cursor: pointer
+   #photo
+      +duration(0.5s)
+      z-index: -5
+      position: absolute
+      top: 53%
+      left: 42%
+      transform: translate(-50%, -50%)
+      width: 550px    
+   .rightS
+      +duration(0.4s)
+      color: $myWhite
+      position: absolute
+      left: 45% 
+      width: $cardWidth
+      height: $cardHeight
+         
+      .rightCon
+         +duration(0.4s)
+         position: absolute
+         left: 0px
+         padding: 40px 0
+         width: $cardWidth / 2
+         height: $cardHeight
+         font-family: 微軟正黑體
+         h1
+            float: right
+            margin-right: 10px
+            font-size: 25px
+            font-weight: 300
+            letter-spacing: -0.6px
+            margin-bottom: 80px
+            text-shadow: 1px 1px 5px $myBlack 
+         h2
+            float: right
+            margin-right: 10px 
+            letter-spacing: 0px
+            font-weight: 300
+            font-size: 13px
+         hr
+            //float: right
+            margin-right: 10px
+            width: 20px
+            border: 0
+            border-bottom: 3px solid rgba($myWhite, 0.8) 
+            position: absolute
+            left: 42px
+            top: 98px
+         h3
+            float: right
+            margin-right: 45px
+            font-weight: 300
+            font-size: 15px
+            margin-top: 10px
+         h6
+            font-family: 'Roboto', sans-serif
+            float: left
+            margin-top: 3px
+            font-weight: 300
+            font-size: 10px
+            white-space: nowrap
+      &:before
+         position: absolute
+         z-index: -1
+         content: ''
+         width: 100%
+         height: 100%
+         left: -15px
+         +transformSkew(-15deg)
+         box-shadow: -1px 5px 10px black
+         background: $myBlack
+         //background: -webkit-linear-gradient(to left, #517fa4 , #243949) 
+         background: linear-gradient(to left, #446A88, $myBlack )
+   .rightBack
+      +duration(0.4s)
+      +transformSkew(15deg)
+      position: absolute
+      width: $cardWidth + 20px
+      height: $cardHeight
+      opacity: 0.6
+      background: $myWhite
+      box-shadow: -1px 0px 10px black
+      left: 40%
+      z-index: -3 
+a
+   color: $myBlack
+   text-decoration: none
+a:visited
+   color: $myBlack
+   
+
+
+#decor
+   +transformSkew(-15deg)
+   z-index: -1
+   box-shadow: -40px -20px 50px $myBlack
+   height: 1000px
+   width: 500px
+   max-width: 500px
+   background: rgba($myWhite, 1)
+
+   
+//-------Cube--------
+#wrap
+   position: absolute
+   z-index: -1
+   top: 55%
+   left: 30%
+   perspective: 800px
+   perspective-origin: 50% 50%
+   .cube
+      transform: rotateX(30deg) rotateY(40deg) rotateZ(90deg) 
+      //animation: spinIn 0.6s ease
+      +duration(1s)
+      position: relative
+      width: 100px
+      height: 100px
+      transform-style: preserve-3d
+      div
+         position: absolute
+         width: 100px
+         height: 100px
+      .back
+         background: #263545
+         transform: translateZ(-50px) rotateY(180deg)
+
+      .right
+         background: #3A5169
+         transform: rotateY(-270deg) translateX(50px)
+         transform-origin: top right
+
+      .left
+         background: #3A5169
+         transform: rotateY(270deg) translateX(-50px)
+         transform-origin: center left
+
+      .top
+         background: #2D3F52
+         transform-origin: top center
+         transform: rotateX(90deg) translateY(-50px)
+
+      .bottom
+         background: #2D3F52
+         transform-origin: bottom
+         transform: rotateX(-90deg) translateY(50px)
+
+      .front
+         background: #263545
+         transform: translateZ(50px)
+         
+//---cube2---
+#wrap2
+   position: absolute
+   z-index: -1
+   top: 27%
+   left: 5%
+   perspective: 800px
+   perspective-origin: 50% 50%
+
+
+.cube2
+   //border: 1px solid black
+   transform: rotateX(110deg) rotateY(40deg) rotateZ(10deg) 
+   position: relative
+   width: 60px
+   height: 60px
+   transform-style: preserve-3d
+   div
+      +blur(3px)
+      position: absolute
+      width: 60px
+      height: 60px 
+   .back
+      background: rgba(#263545, 0.3)
+      transform: translateZ(-30px) rotateY(180deg)
+
+   .right
+      background: rgba(#3A5169, 0.3)
+      transform: rotateY(-270deg) translateX(30px)
+      transform-origin: top right
+
+   //.left
+      background: #3A5169
+      transform: rotateY(270deg) translateX(-30px)
+      transform-origin: center left
+
+   //.top
+      background: #2D3F52
+      transform-origin: top center
+      transform: rotateX(90deg) translateY(-30px)
+
+   .bottom
+      background: rgba(#2D3F52, 0.3)
+      transform-origin: bottom
+      transform: rotateX(-90deg) translateY(30px)
+
+   //.front
+      background: #263545
+      transform: translateZ(30px)
+
+
+//@keyframes spinIn
+   from
+      transform: rotateX(30deg) rotateY(-320deg) rotateZ(90deg)
+   to
+      transform: rotateX(30deg) rotateY(40deg) rotateZ(90deg)
+//@keyframes spinOut
+   from
+      transform: rotateX(30deg) rotateY(40deg) rotateZ(90deg)
+   to
+      transform: rotateX(30deg) rotateY(-320deg) rotateZ(90deg)
+
+
+
+
+   
